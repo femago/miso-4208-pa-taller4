@@ -32,7 +32,7 @@ public class FileLinesWriter {
    }
 
    public synchronized void writeLine(String line){
-      writer.write(line);
+      writer.println(line);
    }
 
    public void closeFile(){
