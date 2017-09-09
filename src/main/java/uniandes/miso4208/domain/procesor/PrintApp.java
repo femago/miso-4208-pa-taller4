@@ -10,21 +10,17 @@
  */
 package uniandes.miso4208.domain.procesor;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import uniandes.miso4208.domain.StoreApp;
 
-import java.io.IOException;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 public class PrintApp implements Consumer<StoreApp> {
-   static Logger logger = Logger.getLogger(PrintApp.class.getName());
+    static Logger logger = Logger.getLogger(PrintApp.class.getName());
 
-   @Override
-   public void accept(StoreApp storeApp) {
-      logger.info(storeApp.toString());
-   }
+    @Override
+    public void accept(StoreApp storeApp) {
+        logger.info(storeApp.toString());
+    }
 
 }
