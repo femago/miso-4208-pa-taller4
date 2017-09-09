@@ -17,7 +17,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -29,7 +28,7 @@ public class AppsReportWriter {
 
     private AppsReportWriter() {
         workbook = new XSSFWorkbook();
-        sheet = workbook.createSheet("Apps encontradas");
+        sheet = workbook.createSheet("Apps Encontradas");
     }
 
     public static AppsReportWriter getInstance() {
@@ -41,7 +40,12 @@ public class AppsReportWriter {
         final AtomicInteger colNum = new AtomicInteger(0);
         rowContent.forEach(val -> {
             Cell cell = row.createCell(colNum.getAndAdd(1));
-            cell.setCellValue(val.toString());
+            if (val instanceof Integer)
+                cell.setCellValue((Integer) val);
+            else if (val instanceof Double)
+                cell.setCellValue((Double) val);
+            else
+                cell.setCellValue(val.toString());
         });
     }
 

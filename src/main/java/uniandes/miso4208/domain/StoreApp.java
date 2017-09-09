@@ -21,6 +21,7 @@ public class StoreApp {
     private String changes;
     private String fiveStartCounts;
     private String fourStartCounts;
+    private String comments;
 
     public StoreApp(String id) {
         this.id = id;
@@ -60,18 +61,20 @@ public class StoreApp {
                 ,"Calificaciones"
                 ,"Calificación Promedio"
                 ,"5 Estrellas"
-                ,"4 Estrellas");
+                ,"4 Estrellas"
+                ,"Comentarios");
     }
 
-    public List<String> asRecord(){
-        ArrayList<String> columns = new ArrayList<>();
+    public List<Object> asRecord(){
+        ArrayList<Object> columns = new ArrayList<>();
         columns.add(id);
         columns.add(name);
         columns.add(description);
-        columns.add(ratingsCount);
-        columns.add(avgRating);
-        columns.add(fiveStartCounts);
-        columns.add(fourStartCounts);
+        columns.add(Integer.valueOf(ratingsCount.replaceAll(",","")));
+        columns.add(Double.valueOf(avgRating.replaceAll(",",".")));
+        columns.add(Integer.valueOf(fiveStartCounts.replaceAll(",","")));
+        columns.add(Integer.valueOf(fourStartCounts.replaceAll(",","")));
+        columns.add(comments);
         return columns;
 
     }

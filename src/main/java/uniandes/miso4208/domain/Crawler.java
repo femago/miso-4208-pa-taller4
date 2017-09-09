@@ -41,7 +41,7 @@ public class Crawler {
         load();
         Set container = Collections.synchronizedSet(new HashSet());
         Elements appCards = doc.select(".card.apps .card-content[data-docid]");
-        appCards.stream()
+        appCards.parallelStream()
                 .map(e -> new StoreApp(e.attr("data-docid")))
                 .distinct()
                 .forEach(app -> {

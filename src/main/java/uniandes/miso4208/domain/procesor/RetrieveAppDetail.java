@@ -37,15 +37,17 @@ public class RetrieveAppDetail implements Consumer<StoreApp> {
         storeApp.setDescription(doc.select("[itemprop=description]").text());
         storeApp.setRatingsCount(doc.select(".reviews-num").text());
         storeApp.setAvgRating(doc.select(".score").text());
-        processComments(storeApp, doc.select(".recent-change"));
+
         storeApp.setFiveStartCounts(doc.select(".rating-bar-container.five .bar-number").text());
         storeApp.setFourStartCounts(doc.select(".rating-bar-container.four .bar-number").text());
+
+        storeApp.setChanges(processElementsText(doc.select(".recent-change")));
+        storeApp.setComments(processElementsText(doc.select(".review-text")));
     }
 
-    private void processComments(StoreApp storeApp, Elements select) {
-        storeApp.setChanges(
-                select.stream().map(e -> e.text()).reduce((t, u) -> t + "/n" + u).
-                        get());
+    private String processElementsText(Elements select) {
+        return select.stream().map(e -> e.text()).reduce((t, u) -> t + "\n" + u).
+                orElseGet(() -> "");
     }
 
     private Document loadAppDoc(StoreApp storeApp) {
